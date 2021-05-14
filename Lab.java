@@ -21,9 +21,6 @@ public class Lab {
     //Main Method
     public static void main(String[] args) {
 
-        Lab myMathClass = new Lab();
-        myMathClass.uploadFile();
-
     }
 
     //Method to upload a document and converts the text into an ArrayList

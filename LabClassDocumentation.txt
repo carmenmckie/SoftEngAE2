@@ -1,0 +1,14 @@
+Lab Class
+Created by Nicholas Lhoest 14/05/2021
+
+Methods includes
+uploadFile()
+    Upload pre-exisitng document to program. Converts text into an arraylist.
+clearList()
+    Clear arraylist
+addRequirement()
+    Adds one extra requirement, written by user
+createFile()
+    Creates a file named LabList in Desktop
+writeFile()
+    Writes Arraylist into document
