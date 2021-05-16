@@ -90,7 +90,7 @@ public class View {
 	private JRadioButton course10;
 	public static final int FRAME_HEIGHT = 900; 
 	public static final int FRAME_WIDTH = 1800; 
-	public static final int TEXTAREA_HEIGHT = 43; 
+	public static final int TEXTAREA_HEIGHT = 45; 
 	public static final int TEXTAREA_WIDTH = 20; 
 
 
