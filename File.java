@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
-public class Lab {
+public class File {
 
     //Instance Variables
     private  ArrayList<String> myList = new ArrayList<String>();
