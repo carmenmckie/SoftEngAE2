@@ -367,8 +367,12 @@ public class View {
 	}
 	
 	
+	
+	
+	
+	
 	////////////////////////////////////////
-	// INTERACTION - not implemented yet
+	// INTERACTION - not fully implemented yet
 	////////////////////////////////////////
 	// buttonOne's actionListener: 
 	public class button1Listener implements ActionListener {
@@ -376,7 +380,11 @@ public class View {
 			File.uploadFile();
 			// Converts the ArrayList from 'File' to a String so that .setText() can be used: 
 			String listString = File.getMyList().stream().map(Object::toString).collect(Collectors.joining("," + "\n"));
+			//textArea1 should ONLY be set ONCE at the start of the program: 
 			textArea1.setText(listString);
+			//textArea2 is subject to change throughout the program: 
+			//Before any changes, textArea2 is set to the CSV-read: 
+			textArea2.setText(listString);
 			cardLayout.show(frame.getContentPane(),"two");
 			}
 		
