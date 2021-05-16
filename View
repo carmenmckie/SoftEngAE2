@@ -3,8 +3,8 @@ import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.stream.Collectors;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,16 +39,17 @@ public class View {
 	private JTextField addSkillMethod;
 	private JTextField userEntersMethodOutput1;
 	private JButton searchButton; 
-	private JTextField userEntersMethod; 
+	private JLabel userEntersMethod; 
 	private JTextArea textArea1;
 	private JScrollPane scrollPane1;
 	private JScrollPane scrollPane2;
 	private JLabel JLabel1; 
-	private JLabel menuLabel;
+	private JLabel csvLabel;
+	private JLabel updatedDataLabel;
 	private JTextArea textArea2;
 	private JButton button2;
-	private JButton button3;
-	private JButton button4;
+//	private JButton button3;
+//	private JButton button4;
 	private JLabel userEntersLabel;
 	private JLabel userEntersOutputLabel;
 	private JTextField userEntersMethodOutput2;
@@ -118,6 +119,7 @@ public class View {
 		frame.setVisible(true);
 		
 	}
+	
 
 	private void makeComponents() {
 		frame = new JFrame("AgileFun AE2 Demo");
@@ -162,9 +164,13 @@ public class View {
 		///////////////////////////////////
 		// Panel Four - Menu 
 		panelFour = new JPanel(); 
-		menuLabel = new JLabel("'(menuLabel)' Menu or smth could go here ");
-		panelFour.add(menuLabel);
+		panelFour.setLayout(new BorderLayout());
+		csvLabel = new JLabel("Data from CSV File:");
+		updatedDataLabel = new JLabel("Updated Data:");
+		panelFour.add(csvLabel, BorderLayout.WEST);
+		panelFour.add(updatedDataLabel, BorderLayout.EAST);
 		panelTwo.add(panelFour, BorderLayout.NORTH);
+
 		
 		
 		///////////////////////////////////
@@ -210,12 +216,23 @@ public class View {
 		panelUserEnters = new JPanel(); 
 		panelUserEnters.setLayout(new GridLayout(0, 1));
 		userEntersLabel = new JLabel("T: .userEnters()");
-		userEntersMethod = new JTextField("Please enter the Teacher training needed:");
-		searchButton = new JButton("Search >>");
+		userEntersMethod = new JLabel("Please select the Teacher training needed:");
+		searchButton = new JButton("Maths >> ");
+		// Need to add these as instance variables + properly name 
+		JButton tempButton1 = new JButton("English >>");
+		JButton tempButton2 = new JButton("Geography >>");
+		JButton tempButton3 = new JButton("Physics >>"); 
+		JButton tempButton4 = new JButton("Art >> ");
 		// Add event handling to clear the text when clicked
 		panelUserEnters.add(userEntersLabel);
 		panelUserEnters.add(userEntersMethod);
 		panelUserEnters.add(searchButton);
+		panelUserEnters.add(tempButton1);
+		panelUserEnters.add(tempButton2);
+		panelUserEnters.add(tempButton3);
+		panelUserEnters.add(tempButton4);
+
+
 
 
 		// Output 
@@ -249,13 +266,23 @@ public class View {
 		// Input Skill - .addSkill()
 		panelAddSkillsSearch = new JPanel(); 
 		panelAddSkillsSearch.setLayout(new GridLayout(0, 1));
-		addSkillsSearchLabel = new JLabel("T: .addSkill()");
-		addSkillsSearchField = new JTextField("Please enter the Teacher skills needed:");
-		addSkillsSearchButton = new JButton("Search >>");
+		addSkillsSearchLabel = new JLabel("Please select the Teacher Skills needed: ");
+		addSkillsSearchButton = new JButton("First Aid >>");
+		// Need to add these as instance variables + properly name 
+		JButton tempButtona1 = new JButton("ESOL >> ");
+		JButton tempButtona2 = new JButton("British Sign Language >>");
+		JButton tempButtona3 = new JButton("Data Protection >>");
+		JButton tempButtona4 = new JButton("French Language >>");
 		// Add event handling to clear the text when clicked
 		panelAddSkillsSearch.add(addSkillsSearchLabel);
-		panelAddSkillsSearch.add(addSkillsSearchField);
 		panelAddSkillsSearch.add(addSkillsSearchButton);
+		panelAddSkillsSearch.add(tempButtona1);
+		panelAddSkillsSearch.add(tempButtona2);
+		panelAddSkillsSearch.add(tempButtona3);
+		panelAddSkillsSearch.add(tempButtona4);
+
+
+
 
 		
 		// Output Panel 
@@ -367,26 +394,21 @@ public class View {
 	}
 	
 	
-	
-	
-	
-	
 	////////////////////////////////////////
-	// INTERACTION - not fully implemented yet
+	// INTERACTION - not implemented yet
 	////////////////////////////////////////
 	// buttonOne's actionListener: 
 	public class button1Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			File.uploadFile();
-			// Converts the ArrayList from 'File' to a String so that .setText() can be used: 
-			String listString = File.getMyList().stream().map(Object::toString).collect(Collectors.joining("," + "\n"));
-			//textArea1 should ONLY be set ONCE at the start of the program: 
+			String listString = File.getMyList().stream().map(Object::toString)
+                    .collect(Collectors.joining("," + "\n"));
+			// textArea1 should ONLY be set at the start of the program
+			// At no other point does it change 
 			textArea1.setText(listString);
-			//textArea2 is subject to change throughout the program: 
-			//Before any changes, textArea2 is set to the CSV-read: 
 			textArea2.setText(listString);
 			cardLayout.show(frame.getContentPane(),"two");
-			}
+		}
 		
 	}
 	
@@ -422,3 +444,5 @@ public class View {
 		
 	}
 }
+
+
