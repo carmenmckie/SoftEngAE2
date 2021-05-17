@@ -36,10 +36,7 @@ public class View implements ActionListener {
 	private JPanel panelSelectCourse;
 	private JPanel panelAddTeacherToCourse; 
 	// Components used within Teacher methods: 
-	private JTextField updateTrainingInfoMethod1;
-	private JLabel addSkillMethod;
 	private JTextField userEntersMethodOutput1;
-	private JButton searchButton; 
 	private JLabel userEntersMethod; 
 	private JTextArea textArea1;
 	private JScrollPane scrollPane1;
@@ -56,12 +53,10 @@ public class View implements ActionListener {
 	private JTextField userEntersMethodOutput2;
 	private JLabel updateTrainingInfoLabel;
 	private JLabel addSkillsSearchLabel;
-	private JButton addSkillsSearchButton;
 	private JLabel addSkillsSearchOutputLabel;
 	private JTextField addSkillsSearchOutputField1;
 	private JTextField addSkillsSearchOutputField2;
 	private JLabel addSkillLabel;
-	private JTextField updateTrainingInfoMethod2;
 	private JButton updateTrainingInfoMethod3;
 	private JLabel addSkillMethod2;
 	private JButton addSkillMethod3;
@@ -89,6 +84,33 @@ public class View implements ActionListener {
 	private JRadioButton course8;
 	private JRadioButton course9;
 	private JRadioButton course10;
+	//
+	private JButton removeTeacherFromCourseButton;
+	//
+	// With drop-down menu sections
+	private String[] teacherNames2 = {"Teacher1", "Teacher2", "Teacher3", "Teacher4", "Teacher5", "Teacher6", "Teacher7", "Teacher8", "Teacher9", "Teacher10"};
+	private JComboBox<String> teacherNamesDropDown2 = new JComboBox<String>(teacherNames2);
+	private String[] teacherTraining = { "Training1", "Training2", "Training3", "Training4", "Training5" };
+	private JComboBox<String> teacherTrainingDropDown = new JComboBox<String>(teacherTraining);
+	//
+	private JButton skillButton1 = new JButton("ESOL >> ");;
+	private JButton skillButton2 = new JButton("British Sign Language >>");
+	private JButton skillButton3 = new JButton("Data Protection >>");
+	private JButton skillButton4 = new JButton("French Language");
+	private JButton skillButton5 = new JButton("First Aid >>");
+	//
+	private JButton trainingButton1 = new JButton("English >>");
+	private JButton trainingButton2 = new JButton("Geography >>");
+	private JButton trainingButton3 = new JButton("Physics >>");
+	private JButton trainingButton4 = new JButton("Maths >>");
+	private JButton trainingButton5 = new JButton("Art >>");
+	// 
+	private String[] teacherNames1 = { "Teacher1", "Teacher2", "Teacher3", "Teacher4", "Teacher5", "Teacher6", "Teacher7", "Teacher8", "Teacher9", "Teacher10" };
+	private JComboBox<String> teacherNamesDropDown1 = new JComboBox<String>(teacherNames1);
+	// 
+	private String[] teacherSkills1 = { "Skill1", "Skill2", "Skill3", "Skill4", "Skill5" };
+	private JComboBox<String> teacherSkillsDropDown1 = new JComboBox<String>(teacherSkills1);
+	//
 	public static final int FRAME_HEIGHT = 900; 
 	public static final int FRAME_WIDTH = 1800; 
 	public static final int TEXTAREA_HEIGHT = 45; 
@@ -217,25 +239,18 @@ public class View implements ActionListener {
 		panelUserEnters.setLayout(new GridLayout(0, 1));
 		userEntersLabel = new JLabel("T: .userEnters()");
 		userEntersMethod = new JLabel("Please select the Teacher training needed:");
-		searchButton = new JButton("Maths >> ");
-		// Need to add these as instance variables + properly name 
-		JButton tempButton1 = new JButton("English >>");
-		JButton tempButton2 = new JButton("Geography >>");
-		JButton tempButton3 = new JButton("Physics >>"); 
-		JButton tempButton4 = new JButton("Art >> ");
 		// Add event handling to clear the text when clicked
 		panelUserEnters.add(userEntersLabel);
 		panelUserEnters.add(userEntersMethod);
-		panelUserEnters.add(searchButton);
-		panelUserEnters.add(tempButton1);
-		panelUserEnters.add(tempButton2);
-		panelUserEnters.add(tempButton3);
-		panelUserEnters.add(tempButton4);
+		panelUserEnters.add(trainingButton1);
+		panelUserEnters.add(trainingButton2);
+		panelUserEnters.add(trainingButton3);
+		panelUserEnters.add(trainingButton4);
+		panelUserEnters.add(trainingButton5);
 
 
 
-
-		// Output 
+		// Output Panel 
 		panelUserEntersOutput = new JPanel(); 
 		panelUserEntersOutput.setLayout(new GridLayout(0,1));
 		userEntersOutputLabel = new JLabel("Output: ");
@@ -253,13 +268,9 @@ public class View implements ActionListener {
 		panelUpdateTrainingInfo.setLayout(new GridLayout(5, 0));
 		// Could link with Teacher's .updateTrainingInfo() method? 
 		updateTrainingInfoLabel = new JLabel("Please select a Teacher: ");
-		String[] teacherNames2 = { "Teacher1", "Teacher2", "Teacher3", "Teacher4", "Teacher5", "Teacher6", "Teacher7", "Teacher8", "Teacher9", "Teacher10" };
-		JComboBox<String> teacherNamesDropDown2 = new JComboBox<String>(teacherNames2);
 		teacherNamesDropDown2.setSelectedIndex(0);
 		teacherNamesDropDown2.addActionListener(this);
 		addSkillMethod2 = new JLabel ("Please select the skill to add:");
-		String[] teacherTraining = { "Training1", "Training2", "Training3", "Training4", "Training5" };
-		JComboBox<String> teacherTrainingDropDown = new JComboBox<String>(teacherTraining);
 		teacherTrainingDropDown.setSelectedIndex(4);
 		teacherTrainingDropDown.addActionListener(this);
 		updateTrainingInfoMethod3 = new JButton("Add Training to Teacher >>");
@@ -269,8 +280,11 @@ public class View implements ActionListener {
 		panelUpdateTrainingInfo.add(addSkillMethod2);
 		panelUpdateTrainingInfo.add(teacherTrainingDropDown);
 		panelUpdateTrainingInfo.add(updateTrainingInfoMethod3);
+		
 
-
+		
+		
+		
 		///////////////////////////////////
 		// MIDDLE ROW
 		///////////////////////////////////
@@ -278,19 +292,14 @@ public class View implements ActionListener {
 		panelAddSkillsSearch = new JPanel(); 
 		panelAddSkillsSearch.setLayout(new GridLayout(0, 1));
 		addSkillsSearchLabel = new JLabel("Please select the Teacher Skills needed: ");
-		addSkillsSearchButton = new JButton("First Aid >>");
 		// Need to add these as instance variables + properly name 
-		JButton tempButtona1 = new JButton("ESOL >> ");
-		JButton tempButtona2 = new JButton("British Sign Language >>");
-		JButton tempButtona3 = new JButton("Data Protection >>");
-		JButton tempButtona4 = new JButton("French Language >>");
 		// Add event handling to clear the text when clicked
 		panelAddSkillsSearch.add(addSkillsSearchLabel);
-		panelAddSkillsSearch.add(addSkillsSearchButton);
-		panelAddSkillsSearch.add(tempButtona1);
-		panelAddSkillsSearch.add(tempButtona2);
-		panelAddSkillsSearch.add(tempButtona3);
-		panelAddSkillsSearch.add(tempButtona4);
+		panelAddSkillsSearch.add(skillButton1);
+		panelAddSkillsSearch.add(skillButton2);
+		panelAddSkillsSearch.add(skillButton3);
+		panelAddSkillsSearch.add(skillButton4);
+		panelAddSkillsSearch.add(skillButton5); 
 
 
 
@@ -312,15 +321,9 @@ public class View implements ActionListener {
 		panelAddSkill = new JPanel(); 
 		panelAddSkill.setLayout(new GridLayout(0, 1));
 		addSkillLabel = new JLabel("Please select a teacher: ");	
-		String[] teacherNames1 = { "Teacher1", "Teacher2", "Teacher3", "Teacher4", "Teacher5", "Teacher6", "Teacher7", "Teacher8", "Teacher9", "Teacher10" };
-		JComboBox<String> teacherNamesDropDown1 = new JComboBox<String>(teacherNames1);
 		teacherNamesDropDown1.setSelectedIndex(0);
 		teacherNamesDropDown1.addActionListener(this);
 		addSkillMethod2 = new JLabel ("Please select the skill to add:");
-		
-		
-		String[] teacherSkills1 = { "Skill1", "Skill2", "Skill3", "Skill4", "Skill5" };
-		JComboBox<String> teacherSkillsDropDown1 = new JComboBox<String>(teacherSkills1);
 		teacherSkillsDropDown1.setSelectedIndex(4);
 		teacherSkillsDropDown1.addActionListener(this);
 		addSkillMethod3 = new JButton("Add Skill to Teacher >>");
@@ -396,7 +399,7 @@ public class View implements ActionListener {
 		panelAddTeacherToCourse.setLayout(new GridLayout(0,1));
 		addTeacherToCourseLabel = new JLabel("Please select: ");
 		addTeacherToCourseButton = new JButton("Add Teacher to Course >>");
-		JButton removeTeacherFromCourseButton = new JButton("Remove Teacher from Course >>");
+		removeTeacherFromCourseButton = new JButton("Remove Teacher from Course >>");
 		panelAddTeacherToCourse.add(addTeacherToCourseLabel);
 		panelAddTeacherToCourse.add(addTeacherToCourseButton);
 		panelAddTeacherToCourse.add(removeTeacherFromCourseButton);
