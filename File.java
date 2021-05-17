@@ -5,11 +5,11 @@ import java.util.*;
 public class File {
 
     //Instance Variables
-    private static  ArrayList<String> myList = new ArrayList<String>();
+    private ArrayList<String> myList = new ArrayList<String>();
     private String userDir = System.getProperty("user.home");
 
     //Getter Method for Arraylist
-    public static ArrayList<String> getMyList() {
+    public ArrayList<String> getMyList() {
         return myList;
     }
 
@@ -24,7 +24,7 @@ public class File {
     }
 
     //Method to upload a document and converts the text into an ArrayList
-    public static void uploadFile(){
+    public void uploadFile(){
         java.io.File file;
         Scanner fileInput;
         int theResponse;
@@ -79,48 +79,48 @@ public class File {
         System.out.println(getMyList());
     }
 
-//    public static void createFile(){
-//
-//        //Initialize File Object and Passing Path as Argument
-//        File file = new File(getUserDir() + "\\Desktop\\LabList.txt");
-//        boolean result;
-//        try
-//        {
-//            result = file.createNewFile();      //Creates a New File
-//            if(result)      // Test if Successfully Created a New File
-//            {
-//                System.out.println("file created "+file.getCanonicalPath()); //Returns the Path String
-//            }
-//            else
-//            {
-//                System.out.println("File already exist at location: "+file.getCanonicalPath());
-//            }
-//        }
-//        catch (IOException e)
-//        {
-//            e.printStackTrace();    //Prints Exception if any
-//        }
-//    }
-//
-//    public static void writeFile(){
-//
-//        //First Create File, Before Writing it
-//        createFile();
-//
-//        String fullList = "";
-//
-//        FileWriter writer;
-//        try {
-//            writer = new FileWriter(getUserDir() + "\\Desktop\\LabList.txt");
-//            //Go through entire ArrayList and Concatenating Strings into String FullList
-//            for(String section : getMyList()){
-//                fullList = fullList + section + "\n";
-//            }
-//            //Write String FullList into the File
-//            writer.write(fullList);
-//            writer.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();        //Prints Exception if any
-//        }
-//    }
+   public void createFile(){
+
+       //Initialize File Object and Passing Path as Argument
+       File file = new File(getUserDir() + "\\Desktop\\LabList.txt");
+       boolean result;
+       try
+       {
+           result = file.createNewFile();      //Creates a New File
+           if(result)      // Test if Successfully Created a New File
+           {
+               System.out.println("file created "+file.getCanonicalPath()); //Returns the Path String
+           }
+           else
+           {
+               System.out.println("File already exist at location: "+file.getCanonicalPath());
+           }
+       }
+       catch (IOException e)
+       {
+           e.printStackTrace();    //Prints Exception if any
+       }
+   }
+
+   public void writeFile(){
+
+       //First Create File, Before Writing it
+       createFile();
+
+       String fullList = "";
+
+       FileWriter writer;
+       try {
+           writer = new FileWriter(getUserDir() + "\\Desktop\\LabList.txt");
+           //Go through entire ArrayList and Concatenating Strings into String FullList
+           for(String section : getMyList()){
+               fullList = fullList + section + "\n";
+           }
+           //Write String FullList into the File
+           writer.write(fullList);
+           writer.close();
+       } catch (IOException e) {
+           e.printStackTrace();        //Prints Exception if any
+       }
+   }
 }
