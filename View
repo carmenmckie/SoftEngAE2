@@ -157,7 +157,7 @@ public class View {
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				searchEngine.getCourseList(); 
-				SearchEngine.saveFile(searchEngine.getCourseList(), searchEngine.getTeacherList());
+				Lab.saveFile(searchEngine.getCourseList(), searchEngine.getTeacherList());
 				System.exit(CLOSE_PROGRAM); 
 			}
 		});
