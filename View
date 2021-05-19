@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
-public class View implements ActionListener {
+public class View {
 
 	private JFrame frame;
 	private JPanel panelOne;
@@ -25,27 +25,41 @@ public class View implements ActionListener {
 	private JPanel panelSeven; 
 	private JPanel panelEight; 
 	private JPanel panelUserEnters;
+	private JPanel panelTeachersWithTheseSkills; 
+	private JPanel panelTeachersWithoutTheseSkills;
+	private JPanel panelAddSkillToTeacher; 
+	private JPanel panelAddTeacherToLab; 
 	private JTextArea textArea1;
 	private JScrollPane scrollPane1;
 	private JScrollPane scrollPane2;
 	private JLabel JLabel1; 
 	private JLabel csvLabel;
 	private JLabel updatedDataLabel;
+	private JLabel teachersWithTheseSkillsLabel;
+	private JLabel teachersWithoutTheseSkillsLabel; 
+	private JLabel addSkillToTeacherLabel; 
+	private JLabel addTeacherToLabLabel; 
 	private JTextArea textArea2;
 	private JTextField teachersWithoutTheseSkillsResult;
+	private JTextField addSkillToTeacherField; 
+	private JTextField addTeacherToLabEntry; 
 	private JButton button2;
 	private JLabel userEntersLabel;
 	private JTextField teachersWithTheseSkillsResult;
+	private JTextField userEntersTraining;
 	public static final int FRAME_HEIGHT = 900; 
 	public static final int FRAME_WIDTH = 1800; 
 	public static final int TEXTAREA_HEIGHT = 45; 
 	public static final int TEXTAREA_WIDTH = 20; 
+	public static final int CLOSE_PROGRAM = 0; 
 	private JButton buttonOne;
 	private CardLayout cardLayout;
 	private SearchEngine searchEngine;
 	private Lab lab1;
 	private ArrayList<String> courseInfo;
-	
+	private ArrayList<Course> courses = new ArrayList<>();
+	private ArrayList<Teacher> teachers = new ArrayList<>();
+//	
 	
 	public void setSearchEngine(SearchEngine searchEngine) {
 		this.searchEngine = searchEngine; 
@@ -65,8 +79,7 @@ public class View implements ActionListener {
 		frame.add(panelTwo,"two");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1800,900);
-		frame.setVisible(true);
-		
+		frame.setVisible(true);		
 	}
 	
 
@@ -75,10 +88,7 @@ public class View implements ActionListener {
 		cardLayout = new CardLayout();
 		frame.setSize(FRAME_WIDTH,FRAME_HEIGHT);
 		
-		
-		
-		
-		
+
 		/////////////////////////////
 		// Page One: (Class Director) 
 		///////////////////////////// 
@@ -90,20 +100,12 @@ public class View implements ActionListener {
 		panelOne.add(buttonOne);
 		
 		
-		
-		
-		
-		
 		////////////////////////////
 		// Page Two: Administrator 
 		////////////////////////////
 		panelTwo = new JPanel();
 		panelTwo.setLayout(new BorderLayout());
 
-		
-		
-		
-		
 		
 		///////////////////////////////////
 		// WEST 
@@ -118,12 +120,7 @@ public class View implements ActionListener {
 		panelThree.add(scrollPane1);
 		panelTwo.add(panelThree, BorderLayout.WEST);
 		
-		
-		
-		
-		
-		
-		
+
 		///////////////////////////////////
 		// NORTH
 		///////////////////////////////////
@@ -137,11 +134,6 @@ public class View implements ActionListener {
 		panelTwo.add(panelFour, BorderLayout.NORTH);
 
 		
-		
-		
-		
-		
-		
 		///////////////////////////////////
 		// EAST 
 		///////////////////////////////////
@@ -152,11 +144,6 @@ public class View implements ActionListener {
 		scrollPane2 = new JScrollPane(textArea2); 
 		panelFive.add(scrollPane2); 
 		panelTwo.add(panelFive, BorderLayout.EAST);
-		
-		
-		
-		
-		
 		
 		
 		///////////////////////////////////
@@ -171,35 +158,11 @@ public class View implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				searchEngine.getCourseList(); 
 				SearchEngine.saveFile(searchEngine.getCourseList(), searchEngine.getTeacherList());
-				System.exit(0); 
-				
-				// *******************************
-				// *******************************
-				// *******************************
-
-				
-				// Needs to save
-				// searchEngine's courseList and teacherList (updated throughout the program)
-				// Write them to a file on the user's laptop
-				// Close the program 
-				
-				
-				// ********************************
-				// *******************************
-				// *******************************
-
-				
-				
-				
+				System.exit(CLOSE_PROGRAM); 
 			}
 		});
 		panelSeven.add(button2, BorderLayout.EAST);
 
-		
-		
-		
-		
-		
 		///////////////////////////////////
 		// CENTER
 		///////////////////////////////////
@@ -208,11 +171,6 @@ public class View implements ActionListener {
 		panelTwo.add(panelEight, BorderLayout.CENTER);
 
 		
-		
-		
-		
-		
-		
 		///////////////////////////////////
 		// TOP ROW
 		///////////////////////////////////
@@ -220,7 +178,7 @@ public class View implements ActionListener {
 		panelUserEnters = new JPanel(); 
 		panelUserEnters.setLayout(new GridLayout(0, 1));
 		userEntersLabel = new JLabel("<html>Please enter the <b>skill</b><br> you are searching for,<br> followed by enter:</html>");
-		JTextField userEntersTraining = new JTextField();
+		userEntersTraining = new JTextField();
 		userEntersTraining.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// User enters a skill, and this then sets the output of the other two boxes so the user can 
@@ -256,43 +214,40 @@ public class View implements ActionListener {
 		panelUserEnters.add(userEntersTraining);
 		panelEight.add(panelUserEnters);
 
-		
-		
-		// Result1: teachers with these skills 
-		JPanel panelTeachersWithTheseSkills = new JPanel(); 
+
+		// Result Panel: teachers with these skills 
+		panelTeachersWithTheseSkills = new JPanel(); 
 		panelTeachersWithTheseSkills.setLayout(new GridLayout(0,1));
-		JLabel teachersWithTheseSkillsLabel = new JLabel("<html> Teachers <b>with</b> these skills: <html>");
+		teachersWithTheseSkillsLabel = new JLabel("<html> Teachers <b>with</b> these skills: <html>");
 		teachersWithTheseSkillsResult = new JTextField(); 
 		panelTeachersWithTheseSkills.add(teachersWithTheseSkillsLabel);
 		panelTeachersWithTheseSkills.add(teachersWithTheseSkillsResult);
 		panelEight.add(panelTeachersWithTheseSkills);
 		
 		
-		
 	
-		// Result2: teachers without these skills 
-		JPanel panelTeachersWithoutTheseSkills = new JPanel(); 
+		// Result Panel: teachers without these skills 
+		panelTeachersWithoutTheseSkills = new JPanel(); 
 		panelTeachersWithoutTheseSkills.setLayout(new GridLayout(0,1));
-		JLabel teachersWithoutTheseSkillsLabel = new JLabel("<html> Teachers <b>without</b> these skills: <html>");
+		teachersWithoutTheseSkillsLabel = new JLabel("<html> Teachers <b>without</b> these skills: <html>");
 		teachersWithoutTheseSkillsResult = new JTextField(); 
 		panelTeachersWithoutTheseSkills.add(teachersWithoutTheseSkillsLabel);
 		panelTeachersWithoutTheseSkills.add(teachersWithoutTheseSkillsResult);
 		panelEight.add(panelTeachersWithoutTheseSkills);
 		
 
-		JPanel panelAddSkillToTeacher = new JPanel(); 
+		// Add Skill to Teacher Panel
+		panelAddSkillToTeacher = new JPanel(); 
 		panelAddSkillToTeacher.setLayout(new GridLayout(0,1)); 
-		JLabel addSkillToTeacherLabel = new JLabel("<html>Please enter the <b>teacher</b>,<br> and the <b>skill</b> to add to them,<br> seperated by a <b>space</b>,<br> and followed by <b>enter</b>:</html>");
-		JTextField addSkillToTeacherField = new JTextField(); 
+		addSkillToTeacherLabel = new JLabel("<html>Please enter the <b>teacher</b>,<br> and the <b>skill</b> to add to them,<br> seperated by a <b>space</b>,<br> and followed by <b>enter</b>:</html>");
+		addSkillToTeacherField = new JTextField(); 
 		addSkillToTeacherField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				String data = addSkillToTeacherField.getText();
 				// Pass to Search Engine's method to add a particular skill to a Teacher: 
 				searchEngine.addSkillToTeacher(data); 
 				addSkillToTeacherField.setText("Processed");
 				// Array to String, so it can be printed in the JTextField 
-//				ArrayList<Teacher> temp = searchEngine.getTeacherList();
 				StringBuffer sb = new StringBuffer();
 			      for (Teacher s : searchEngine.getTeacherList()) {
 			         sb.append(s);
@@ -301,19 +256,17 @@ public class View implements ActionListener {
 			      String str = sb.toString();
 			      textArea2.setText(str);
 				}
-			
 		});
 		panelAddSkillToTeacher.add(addSkillToTeacherLabel);
 		panelAddSkillToTeacher.add(addSkillToTeacherField);
 		panelEight.add(panelAddSkillToTeacher);
 
 		
-		
 		// Add Teacher to Lab panel 
-		JPanel panelAddTeacherToLab = new JPanel(); 
+		panelAddTeacherToLab = new JPanel(); 
 		panelAddTeacherToLab.setLayout(new GridLayout(0,1));
-		JLabel addTeacherToLabLabel = new JLabel("<html>Please enter the <b>Course</b>,<br> and the <b>Lab</b>,<br> and the <b>Teacher</b> to add, seperated by a <b>space</b>,<br> and followed by <b>enter</b>:</html>");
-		JTextField addTeacherToLabEntry = new JTextField(); 
+		addTeacherToLabLabel = new JLabel("<html>Please enter the <b>Course</b>,<br> and the <b>Lab</b>,<br> and the <b>Teacher</b> to add, seperated by a <b>space</b>,<br> and followed by <b>enter</b>:</html>");
+		addTeacherToLabEntry = new JTextField(); 
 		addTeacherToLabEntry.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				String data = addTeacherToLabEntry.getText();
@@ -330,30 +283,24 @@ public class View implements ActionListener {
 			      textArea2.setText(str);
 				}			
 		}); 
-		
 		panelAddTeacherToLab.add(addTeacherToLabLabel);
 		panelAddTeacherToLab.add(addTeacherToLabEntry);
 		panelEight.add(panelAddTeacherToLab);
-
-		
-		
 		
 	}
 	
 	////////////////////////////////////////
-	////////////////////////////////////////
-	////////////////////////////////////////
-	// INTERACTION - not fully finished yet
-	////////////////////////////////////////
-	////////////////////////////////////////
+	// Interaction 
 	////////////////////////////////////////
 
-	
 	
 	// buttonOne's actionListener: 
 	public class button1Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			courseInfo = lab1.uploadFile();
+			// Creates DataHandling object so data from file can be read: 
+			DataHandling dh = new DataHandling(courses, teachers, courseInfo); 
+			dh.dataHandler();
 			String listString = courseInfo.stream().map(Object::toString)
                     .collect(Collectors.joining("," + "\n"));
 			// textArea1 should ONLY be set at the start of the program
@@ -362,17 +309,28 @@ public class View implements ActionListener {
 			textArea2.setText("");
 			cardLayout.show(frame.getContentPane(),"two");
 		}
-		
+
 	}
 
+		public ArrayList<String> getCourseInfo(){
+		return this.courseInfo;
+	}
+
+	public ArrayList<Teacher> getTeacherList(){
+		return this.teachers;
+	}
 	
+	public ArrayList<Course> getCourseList(){
+		return this.courses;
+	}
+
+
 	public class OtherCardListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			cardLayout.show(frame.getContentPane(),"one");
 		}
 		
 	}
-	
 	
 	public class BothListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -386,36 +344,7 @@ public class View implements ActionListener {
 			}
 		}	
 	}
-	
-
-		
-	
-
-	public static void main(String[] args) {
-		
-		
-	}
-
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	//
-	public Lab getLab() {
-		return this.lab1; 
-	}
-	
-	public ArrayList<String> getCourseInfo(){
-		return this.courseInfo; 
-	}
-
-	
-	
-
 }
-	
+
+
 
