@@ -54,12 +54,12 @@ public class View {
 	public static final int CLOSE_PROGRAM = 0; 
 	private JButton buttonOne;
 	private CardLayout cardLayout;
-	private SearchEngine searchEngine = new SearchEngine();
+	private SearchEngine searchEngine;
 	private Lab lab1;
 	private ArrayList<String> courseInfo;
-//	private ArrayList<Course> courses = new ArrayList<>();
-//	private ArrayList<Teacher> teachers = new ArrayList<>();
-	
+	private ArrayList<Course> courses = new ArrayList<>();
+	private ArrayList<Teacher> teachers = new ArrayList<>();
+//	
 	
 	public void setSearchEngine(SearchEngine searchEngine) {
 		this.searchEngine = searchEngine; 
@@ -298,7 +298,9 @@ public class View {
 	public class button1Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			courseInfo = lab1.uploadFile();
-//			this.makeDataHandler(); 
+			// Creates DataHandling object so data from file can be read: 
+			DataHandling dh = new DataHandling(courses, teachers, courseInfo); 
+			dh.dataHandler();
 			String listString = courseInfo.stream().map(Object::toString)
                     .collect(Collectors.joining("," + "\n"));
 			// textArea1 should ONLY be set at the start of the program
@@ -308,36 +310,19 @@ public class View {
 			cardLayout.show(frame.getContentPane(),"two");
 		}
 
-		
-		
-//		- Temporarily fixed double upload bug, but searchEngine then didn't work 
-//		
-//		private void makeDataHandler() {
-//			ArrayList<Course> courses = new ArrayList<>();
-//			ArrayList<Teacher> teachers = new ArrayList<>();
-//			DataHandling dh = new DataHandling(courses, teachers, courseInfo);
-//			dh.dataHandler();
-//		}
-//		
-//	}
+	}
 
-	
-//		public ArrayList<String> getCourseInfo(){
-//		return this.courseInfo;
-//	}
-//
-//	public ArrayList<Teacher> getTeacherList(){
-//		return this.teachers;
-//	}
-//	
-//	public ArrayList<Course> getCourseList(){
-//		return this.courses;
-//	}
-//}
+		public ArrayList<String> getCourseInfo(){
+		return this.courseInfo;
+	}
 
+	public ArrayList<Teacher> getTeacherList(){
+		return this.teachers;
+	}
 	
-	
-	
+	public ArrayList<Course> getCourseList(){
+		return this.courses;
+	}
 
 
 	public class OtherCardListener implements ActionListener {
@@ -346,7 +331,6 @@ public class View {
 		}
 		
 	}
-	
 	
 	public class BothListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -361,5 +345,6 @@ public class View {
 		}	
 	}
 }
-}
+
+
 
