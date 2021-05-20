@@ -2,8 +2,8 @@
 public class Main {
 
 	public static void main(String[] args) {
-				Lab lab1 = new Lab();
-				View GUI = new View(lab1); 
+				FileIO fileHandler = new FileIO();
+				View GUI = new View(fileHandler); 
 				SearchEngine searchEngine = SearchEngine.getSearchEngine(); 
 				searchEngine.setAll(GUI.getTeacherList(), GUI.getCourseList());
 				GUI.setSearchEngine(searchEngine);
