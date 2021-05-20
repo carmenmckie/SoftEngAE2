@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-//TODO make search engine into Singleton to make this satisfy the requirements becasue we only ever need one of these objects 
+//this class was made into a Singleton because we only ever need one of these objects and would not want more of them to be created:
 
 public class SearchEngine {
 	private ArrayList <Teacher> teacherList;
 	private ArrayList <Course> courseList; 
 	
-
 	private static SearchEngine se = new SearchEngine();
 	
 
@@ -18,8 +17,7 @@ public class SearchEngine {
 		this.teacherList = teacherList;
 		this.courseList = courseList; 
 	}
-	
-	
+
 	
 	//method to find a teacher by passing it a skill
 	public ArrayList<Teacher> findTeacher(String skill) {
@@ -97,14 +95,13 @@ public class SearchEngine {
 		}
 		return temp; 
 	}
-	
+	//method to find how many teachers are needed for one lab
 	public int findTeachersNeededPerLab(String data) { 
 		int temp = this.findLabByName(data).getnTeachers(); 
 		return temp; 
 	}	
 	
-	//method to return what teachers do not have ALL the required skills (i.e. pass it an ArrayList<String> of skills)
-	// Changed to just a String and not a String Array 
+	//method to return what teachers do not have the required skills (i.e. pass it an ArrayList<String> of skills)
 	public ArrayList<Teacher> findTeachersToTrain(String skill) {
 		ArrayList<Teacher> toTrain = new ArrayList<Teacher>();
 		for(Teacher i: teacherList) {
@@ -114,7 +111,7 @@ public class SearchEngine {
 		}
 		return toTrain;
 	}
-	
+	//getters and setters:
 	public ArrayList<Teacher> getTeacherList(){
 		return this.teacherList;
 	}
