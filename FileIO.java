@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
-public class Lab {
+public class FileIO {
     private  ArrayList<String> labList = new ArrayList<String>();
     // static - an issue 
     private static String userDir = System.getProperty("user.home");
