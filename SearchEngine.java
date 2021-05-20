@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
 //TODO make search engine into Singleton to make this satisfy the requirements becasue we only ever need one of these objects 
 
 public class SearchEngine {
@@ -66,62 +64,44 @@ public class SearchEngine {
 	
 
 	public void addTeacherToLab(String data) {
-//		Course tempCourse = new Course(); 
 		Scanner s = new Scanner(data); 
 		String course = s.next(); 
 		String lab = s.next(); 
 		String teacher = s.next(); 
+		this.findLabByName(data).getTeachersInLab().add(findTeacherByName(teacher)); 
+		int temp = this.findLabByName(data).getnTeachers(); 
+		// So that if a teacher is added, the number of teachers needed in the lab is decreased:
+		if (!(temp == 0)) {
+		// unless it is zero, then don't decrease this, as -1 teachers needed is not appropriate 
+			temp = temp - 1; 
+		}
+		this.findLabByName(data).setnTeachers(temp);
+	}
+	
+	public FileIO findLabByName(String data) {
+		FileIO temp = null; 
+		Scanner s = new Scanner(data); 
+		String course = s.next(); 
+		String lab = s.next(); 
 		// Look for the Course: 
 		for(int i=0; i < this.getCourseList().size(); i++) {
 			// Find the Course the user entered: 
 			if(this.getCourseList().get(i).getCourseName().contains(course)) {
-//				tempCourse = this.getCourseList().get(i);
 				// Find the Lab within that course: 
 				for(int j = 0; j < this.getCourseList().get(i).getLabList().size(); j++) {
 					if(this.getCourseList().get(i).getLabList().get(j).getName().contains(lab)) {
-						// Add the Teacher requested to that specific Lab 
-						this.getCourseList().get(i).getLabList().get(j).getTeachersInLab().add(findTeacherByName(teacher));
-						// find teacher 
+						temp = this.getCourseList().get(i).getLabList().get(j);
 					}
 				}
-				
-				
 			}
-		}					
-	}
-	
-	// *********************************************************************************
-	// Actual directory needs to be updated to be dynamic 
-	public static void saveFile(ArrayList<Course> courses, ArrayList<Teacher> teachers) {
-	    FileWriter fw = null; 
-    	StringBuffer sb = new StringBuffer();
-    	StringBuffer sb2 = new StringBuffer();
-	    try {
-	    	fw = new FileWriter("/Users/cmckie/Desktop/Requirements.txt");
-	    	// Courses 
-	            for (Course s : courses) {
-	              sb.append(s + "\n");
-	            }
-	        String coursesInString = sb.toString();
-	         fw.write(coursesInString);
-	        // Teachers
-		  for (Teacher s2 : teachers) {
-		       sb2.append(s2 + "\n");
-		     }
-	       String teachersInString = sb2.toString();
-	       fw.write(teachersInString);
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    } finally { 
-	    	try {
-			fw.close(); 
-		} catch (IOException e) {
-			e.printStackTrace(); 
 		}
-	    }
+		return temp; 
 	}
 	
-	
+	public int findTeachersNeededPerLab(String data) { 
+		int temp = this.findLabByName(data).getnTeachers(); 
+		return temp; 
+	}	
 	
 	//method to return what teachers do not have ALL the required skills (i.e. pass it an ArrayList<String> of skills)
 	// Changed to just a String and not a String Array 
@@ -143,7 +123,6 @@ public class SearchEngine {
 		return this.courseList; 
 	}
 	
-	////
 	public void setTeacherList(ArrayList<Teacher> teacherList) {
 		this.teacherList = teacherList; 
 	}
