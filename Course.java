@@ -38,10 +38,9 @@ public class Course {
 		String lab = "";
 		for(FileIO i: labs) {
 			lab += i.getName() + " " + i.getTeachersInLab();
+			lab += ", teachers now needed for this lab: " + i.getnTeachers() + "\n";
 		}
-		
 		return lab;
-		
 	}
 	
 	public String getCourseName() {
@@ -55,7 +54,7 @@ public class Course {
 
 	// Need to get it to also print the Teachers in each lab 
 	public String toString() {
-		return this.name + " " + this.printLabs();
+		return this.name + " " + this.printLabs() + "\n";
 	}
 	
 }
