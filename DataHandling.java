@@ -47,7 +47,7 @@ public class DataHandling {
 					//the second entry is the number of staff required to teach that lab
 					int labstaff = sc2.nextInt();
 					
-					FileIO lab = new FileIO(labname, labstaff);
+					Lab lab = new Lab(labname, labstaff);
 					course.setLab(lab);
 				}
 				//after the last comma, the skills are read in which are separated in the file by a space character

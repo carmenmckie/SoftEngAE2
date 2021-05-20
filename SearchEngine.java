@@ -76,8 +76,8 @@ public class SearchEngine {
 		this.findLabByName(data).setnTeachers(temp);
 	}
 	
-	public Labs findLabByName(String data) {
-		Labs temp = null; 
+	public Lab findLabByName(String data) {
+		Lab temp = null; 
 		Scanner s = new Scanner(data); 
 		String course = s.next(); 
 		String lab = s.next(); 

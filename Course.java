@@ -2,10 +2,10 @@ import java.util.ArrayList;
 //this class contains the name of the course, holds a reference to the Labs class as an ArrayList, and also an ArrayList of skills that are required for a course
 public class Course {
 	private String name;
-	private ArrayList <Labs> labs; 
+	private ArrayList <Lab> labs; 
 	private ArrayList <String> skills;
 	
-	public Course(String name, ArrayList <Labs> labs, ArrayList <String> skills) {
+	public Course(String name, ArrayList <Lab> labs, ArrayList <String> skills) {
 		this.name = name;
 		this.labs = labs;
 		this.skills = skills;
@@ -13,14 +13,14 @@ public class Course {
 	}
 	public Course() {
 		this.name = null;
-		this.labs = new ArrayList<Labs>();
+		this.labs = new ArrayList<Lab>();
 		this.skills = new ArrayList<String>();
 	}
 	//getters and setters:
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setLab(Labs lab) {
+	public void setLab(Lab lab) {
 		this.labs.add(lab);
 	}
 	
@@ -28,7 +28,7 @@ public class Course {
 		return this.name;
 	}
 	
-	public ArrayList<Labs> getLabList(){
+	public ArrayList<Lab> getLabList(){
 		return this.labs;
 	}
 	
@@ -39,7 +39,7 @@ public class Course {
 	// printLabs method to print how many teachers are required for a lab
 	public String printLabs() {
 		String lab = "";
-		for(Labs i: labs) {
+		for(Lab i: labs) {
 			lab += i.getName() + " " + i.getTeachersInLab();
 			lab += ", teachers now needed for this lab: " + i.getnTeachers() + "\n";
 		}
