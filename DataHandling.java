@@ -73,10 +73,10 @@ public class DataHandling {
 		}
 		
 		for(Course i: courses) {
-			System.out.print(i.toString());
+			System.out.print(i);
 		}
 		for(Teacher i: teachers) {
-			System.out.println(i.toString());
+			System.out.println(i);
 		}
 	}
 }
