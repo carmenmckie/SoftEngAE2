@@ -2,17 +2,10 @@ import java.util.ArrayList;
 
 public class Course {
 	private String name;
-	private ArrayList <FileIO> labs; 
+	private ArrayList <Labs> labs; 
 	private ArrayList <String> skills;
 	
-	
-	// Get Course by Name: 
-//	
-//	public Course returnCourseByName() {
-//		
-//	}
-	
-	public Course(String name, ArrayList <FileIO> labs, ArrayList <String> skills) {
+	public Course(String name, ArrayList <Labs> labs, ArrayList <String> skills) {
 		this.name = name;
 		this.labs = labs;
 		this.skills = skills;
@@ -20,14 +13,14 @@ public class Course {
 	}
 	public Course() {
 		this.name = null;
-		this.labs = new ArrayList<FileIO>();
+		this.labs = new ArrayList<Labs>();
 		this.skills = new ArrayList<String>();
 	}
 	
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setLab(FileIO lab) {
+	public void setLab(Labs lab) {
 		this.labs.add(lab);
 	}
 	public void addSkill(String skill) {
@@ -36,7 +29,7 @@ public class Course {
 	
 	public String printLabs() {
 		String lab = "";
-		for(FileIO i: labs) {
+		for(Labs i: labs) {
 			lab += i.getName() + " " + i.getTeachersInLab();
 			lab += ", teachers now needed for this lab: " + i.getnTeachers() + "\n";
 		}
@@ -47,7 +40,7 @@ public class Course {
 		return this.name;
 	}
 	
-	public ArrayList<FileIO> getLabList(){
+	public ArrayList<Labs> getLabList(){
 		return this.labs;
 	}
 
