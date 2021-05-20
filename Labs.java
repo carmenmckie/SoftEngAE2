@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 
-public class FileIO {
+public class Labs {
     private String name; 
     private int nTeachers;
     private ArrayList <String> skills;
     private ArrayList<Teacher> teachersInLab = new ArrayList<Teacher>();
     
     
-    public FileIO(String name, int nTeachers, ArrayList <String> requirements) {
+    public Labs(String name, int nTeachers, ArrayList <String> requirements) {
         this.name = name;
         this.nTeachers = nTeachers;
         this.skills = requirements;
     }
     
-    public FileIO(String name, int nTeachers) {
+    public Labs(String name, int nTeachers) {
         this.name = name;
         this.nTeachers = nTeachers;
     }
