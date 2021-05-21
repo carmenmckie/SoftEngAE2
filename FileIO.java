@@ -59,22 +59,22 @@ public class FileIO {
 		return getLabList();
     }
 
-    // Not used: 
-    public void clearList(){
-        //Clears the Arraylist
-        getLabList().clear();
-    }
+//     // Not used: 
+//     public void clearList(){
+//         //Clears the Arraylist
+//         getLabList().clear();
+//     }
 
-    // Not used: 
-    public void addRequirement(){
-        System.out.println("Add new requirement: ");
-        //Create New Scanner Object
-        Scanner newCatch = new Scanner(System.in);
-        String myText = newCatch.nextLine();
-        //Adds Text to Array List
-        getLabList().add(myText);
-        System.out.println(getLabList());
-    }
+//     // Not used: 
+//     public void addRequirement(){
+//         System.out.println("Add new requirement: ");
+//         //Create New Scanner Object
+//         Scanner newCatch = new Scanner(System.in);
+//         String myText = newCatch.nextLine();
+//         //Adds Text to Array List
+//         getLabList().add(myText);
+//         System.out.println(getLabList());
+//     }
 
     
 //    
