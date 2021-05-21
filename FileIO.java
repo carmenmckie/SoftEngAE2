@@ -58,49 +58,6 @@ public class FileIO {
         }
 		return getLabList();
     }
-
-//     // Not used: 
-//     public void clearList(){
-//         //Clears the Arraylist
-//         getLabList().clear();
-//     }
-
-//     // Not used: 
-//     public void addRequirement(){
-//         System.out.println("Add new requirement: ");
-//         //Create New Scanner Object
-//         Scanner newCatch = new Scanner(System.in);
-//         String myText = newCatch.nextLine();
-//         //Adds Text to Array List
-//         getLabList().add(myText);
-//         System.out.println(getLabList());
-//     }
-
-    
-//    
-//    public void createFile(){
-//        //Initialize File Object and Passing Path as Argument
-//        File file = new File(getUserDir() + "/Desktop/LabList.txt");
-//        boolean result;
-//        try
-//        {
-//            result = file.createNewFile();      //Creates a New File
-//            if(result)      // Test if Successfully Created a New File
-//            {
-//                System.out.println("file created "+file.getCanonicalPath()); //Returns the Path String
-//            }
-//            else
-//            {
-//                System.out.println("File already exist at location: "+file.getCanonicalPath());
-//            }
-//        }
-//        catch (IOException e)
-//        {
-//            e.printStackTrace();    //Prints Exception if any
-//        }
-//    }
-
-    
     
     public static void saveFile(ArrayList<Course> courses, ArrayList<Teacher> teachers) {
 	    BufferedWriter out = null; 
@@ -133,29 +90,4 @@ public class FileIO {
 		}
 	    }
 	}
-    
-//    
-//  
-//    public void writeFile(){ 
-//        //First Create File, Before Writing it
-////        createFile();
-//
-//        String fullList = "";
-//
-//        FileWriter writer;
-//        try {
-//            writer = new FileWriter(getUserDir() + "/Desktop/LabList.txt");
-//            //Go through entire ArrayList and Concatenating Strings into String FullList
-//            for(String section : getLabList()){
-//                fullList = fullList + section + "\n";
-//            }
-//            //Write String FullList into the File
-//            writer.write(fullList);
-//            writer.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();        //Prints Exception if any
-//        }
-//    }
-//    
-
 }
