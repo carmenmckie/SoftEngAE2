@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.StringJoiner;
+
+// Data Model - providing everything that the View will need 
+// Data that is presented to the user by the View components 
+public class Model {
+
+	// ArrayLists that will be populated by the data input by the user
+	// empty at the start of the program, as requested by the AE2 specification: 
+	private ArrayList<String> courseInfo;
+	private ArrayList<Course> courses = new ArrayList<>();
+	private ArrayList<Teacher> teachers = new ArrayList<>();
+	// FileIO attribute so the user can upload their chosen file: 
+	private FileIO fileHandler = new FileIO();
+	// SearchEngine attribute so the user can search the data they input: 
+	private SearchEngine searchEngine;
+	
+	
+	// return Model's FileIO object (fileHandler) 
+	public FileIO getFileHandler() {
+		return this.fileHandler;
+	}
+	
+	// set the SearchEngine object used within the GUI, in order 
+	// for the user to be able to search the file they input via the GUI: 
+	public void setSearchEngine(SearchEngine searchEngine) {
+		this.searchEngine = searchEngine; 
+	}
+	
+	public SearchEngine getSearchEngine() {
+		return this.searchEngine; 
+	}
+	
+	// return 'courseInfo' (courseInfo is set by the .txt file the user inputs): 
+	public ArrayList<String> getCourseInfo(){
+	return this.courseInfo;
+	}
+	
+	public void setCourseInfo(ArrayList<String> courseInfo) {
+		this.courseInfo = courseInfo; 
+	}
+
+	// return 'teachers' (teachers is set by the .txt file the user inputs): 
+	public ArrayList<Teacher> getTeacherList(){
+		return this.teachers;
+	}
+	
+	// return 'courses' ('courses' is set by the .txt file the user inputs): 
+	public ArrayList<Course> getCourseList(){
+		return this.courses;
+	}
+	
+	// method to convert an ArrayList<> to String
+	// This was required in order to display the data on the GUI - 
+	// the JTextArea could not take an ArrayList as input, only a String:
+	// Thus ArrayLists had to be converted to String so that they could be displayed 
+	// to the user. 
+	// This method uses generics to take any type (and thus can be used with Teacher, Course): 
+	public static <T> String iterableToString(Iterable<T> iterable) {
+	    StringJoiner sj = new StringJoiner("\n");
+	    iterable.forEach(t -> sj.add(t.toString()));
+	    return sj.toString();
+	}
+	
+}
