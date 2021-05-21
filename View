@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,8 +16,10 @@ import javax.swing.JTextField;
 
 
 public class View {
-
+	// Components used within the GUI: 
+	// All made as private attributes to meet good design 
 	private JFrame frame;
+	// JPanel: 
 	private JPanel panelOne;
 	private JPanel panelTwo;
 	private JPanel panelThree;
@@ -30,228 +33,330 @@ public class View {
 	private JPanel panelAddSkillToTeacher; 
 	private JPanel panelAddTeacherToLab; 
 	private JPanel panelCheckLabRequirements; 
-	private JTextArea textArea1;
+	// JScrollPane: 
+	// Added to enable the user to scroll if the data
+	// is too large to fit in the JTextArea: 
 	private JScrollPane scrollPane1;
 	private JScrollPane scrollPane2;
 	private JScrollPane teachersWithTheseSkillsScrollPanel;
 	private JScrollPane teachersWithoutTheseSkillsScrollPanel;
-	private JLabel JLabel1; 
-	private JLabel csvLabel;
+	// JTextArea: 
+	private JTextArea textArea2;
+	private JTextArea teachersWithoutTheseSkillsResult;
+	private JTextArea textArea1;
+	private JTextArea teachersWithTheseSkillsResult;
+	// JLabel: 
+	private JLabel classDirectorLabel; 
+	private JLabel txtFileLabel;
 	private JLabel updatedDataLabel;
 	private JLabel teachersWithTheseSkillsLabel;
 	private JLabel teachersWithoutTheseSkillsLabel; 
 	private JLabel addSkillToTeacherLabel; 
 	private JLabel addTeacherToLabLabel; 
 	private JLabel checkRequirementsLabel; 
-	private JTextArea textArea2;
-	private JTextArea teachersWithoutTheseSkillsResult;
+	private JLabel userEntersLabel;
+	// JTextField: 
 	private JTextField addSkillToTeacherField; 
 	private JTextField addTeacherToLabEntry; 
 	private JTextField checkLabRequirementsEntry; 
+	private JTextField userEntersSkill;
+	// JButton: 
 	private JButton button2;
-	private JLabel userEntersLabel;
-	private JTextArea teachersWithTheseSkillsResult;
-	private JTextField userEntersTraining;
+	private JButton buttonOne;
+	// Static variables for constant values used throughout the program, in
+	// order to meet good design standards: 
 	public static final int FRAME_HEIGHT = 900; 
 	public static final int FRAME_WIDTH = 1800; 
 	public static final int TEXTAREA_HEIGHT = 45; 
 	public static final int TEXTAREA_WIDTH = 20; 
 	public static final int CLOSE_PROGRAM = 0; 
-	private JButton buttonOne;
+	// Used within the center area, as all JPanels using GridLayout have 2 rows:
+	public static final int GRID_LAYOUT_ROWS = 2;
+	// Most of the JPanels used within GridLayout have 1 column: 
+	public static final int GRID_LAYOUT_COLS = 1; 
+	// The center JPanel using GridLayout has 3 columns: 
+	public static final int CENTER_GRID_LAYOUT_COLS = 3;
+	// CardLayout used in order to switch between Administrator and Class Director view: 
 	private CardLayout cardLayout;
+	// SearchEngine attribute so the user can search the data they input: 
 	private SearchEngine searchEngine;
+	// FileIO attribute so the user can upload their chosen file: 
 	private FileIO fileHandler;
+	// ArrayLists that will be populated by the data input by the user
+	// empty at the start of the program, as requested by the AE2 specification: 
 	private ArrayList<String> courseInfo;
 	private ArrayList<Course> courses = new ArrayList<>();
 	private ArrayList<Teacher> teachers = new ArrayList<>();
 	
+	
+	
 	// Called when GUI is made: 
 	public View(FileIO fileHandler) {
+		// Components are made: 
 		makeComponents();
+		// JFrame is given a Card Layout in order to switch between Class Director and Administrator view: 
 		makeLayout();
+		// FileIO attribute fileHandler is set as soon as the GUI is made, 
+		// so that the user is then able to input data as soon as the GUI is 
+		// displayed: 
 		this.fileHandler = fileHandler; 
 	}
 	
-	// Implementing Card Layout
+	
+	
+	// Implementing Card Layout:
 	private void makeLayout() {
 		frame.setLayout(cardLayout);
+		// panelOne is Class Director view (uploading the file) 
 		frame.add(panelOne,"one");
+		// panelTwo is Administrator view - as soon as the file is uploaded, 
+		// Administrator View is loaded which allows the user to search the data, 
+		// add skills to Teachers, add Teachers to a Lab, search 
+		// how many teachers are still needed for a lab, and save the new data to file: 
 		frame.add(panelTwo,"two");
+		// The JFrame is closed when the program is exited, and also when the user presses the 
+		// "save to file and close" button, as described in the AE2 specification: 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1800,900);
+		// constant variables used to meet good design standards: 
+		frame.setSize(FRAME_WIDTH,FRAME_HEIGHT);
+		// set the GUI as visible: 
 		frame.setVisible(true);		
 	}
 	
 
 	private void makeComponents() {
+		// Title given to the GUI: 
 		frame = new JFrame("AgileFun AE2 Demo");
-		cardLayout = new CardLayout();
-		frame.setSize(FRAME_WIDTH,FRAME_HEIGHT);
-		
-		// Class Director Page (Upload File) 
+		// CardLayout object made so that the JFrame can be given this layout: 
+		cardLayout = new CardLayout();		
+		// Class Director Page (Upload File): 
 		panelOne = new JPanel();
-		JLabel1 = new JLabel("Hello Class Director, please choose a file:");
+		classDirectorLabel = new JLabel("Hello Class Director, please choose a file:");
 		buttonOne = new JButton("Choose a File >>");
+		// button1Listener opens a JFileChooser when clicked to enable the user to 
+		// choose their file: 
 		buttonOne.addActionListener(new button1Listener());
-		panelOne.add(JLabel1);
+		// Adding components to this JPanel: 
+		panelOne.add(classDirectorLabel);
 		panelOne.add(buttonOne);
 		
 		
-		// Administrator - work with the data 
+		
+		// Administrator JPanel - loaded after the Class Director 
+		// inputs their .txt file: 
 		panelTwo = new JPanel();
+		// BorderLayout given to the overal JPanel: 
 		panelTwo.setLayout(new BorderLayout());
 
+		
+		
 		
 		// WEST BorderLayout 
 		// panelThree - To Display Data from CSV File 
 		panelThree = new JPanel(); 
+		// constants used to meet good design practices: 
 		textArea1 = new JTextArea(TEXTAREA_HEIGHT, TEXTAREA_WIDTH);
 		// textArea1 will be loaded with data from the .txt file, so this text will be replaced: 
 		textArea1.setText("Data from .txt file to go here");
-		// Original CSV data not to be edited: 
+		// Original .txt data not to be edited, in order for the user to know 
+		// the original information that was loaded from the file: 
 		textArea1.setEditable(false); 
+		// scrollPane added - if the .txt file is too large to fit in the JTextArea (textArea1),
+		// this will allow the user to scroll the area to view all of the information: 
 		scrollPane1 = new JScrollPane(textArea1);
 		panelThree.add(scrollPane1);
+		// Add this to the left hand-side of the page: 
 		panelTwo.add(panelThree, BorderLayout.WEST);
 		
 
-		// NORTH BorderLayout
+		// NORTH BorderLayout (Top of the GUI) 
 		// Panel Four - Menu 
 		panelFour = new JPanel(); 
 		panelFour.setLayout(new BorderLayout());
-		csvLabel = new JLabel("Data from .txt File:");
+		// to be displayed above the loaded data to help the user
+		// navigate the GUI: 
+		txtFileLabel = new JLabel("Data from .txt File:");
+		// updatedDataLabel added to the right-hand side of the page, 
+		// to be displayed above updated data being printed out: 
 		updatedDataLabel = new JLabel("Updated Data:");
-		panelFour.add(csvLabel, BorderLayout.WEST);
+		panelFour.add(txtFileLabel, BorderLayout.WEST);
 		panelFour.add(updatedDataLabel, BorderLayout.EAST);
 		panelTwo.add(panelFour, BorderLayout.NORTH);
 
 		
-		// EAST BorderLayout 
+		// EAST BorderLayout (Left-Hand side of the GUI): 
 		// Panel Five - Updated Data 
 		panelFive = new JPanel(); 
+		// constants used to meet good design practices: 
 		textArea2 = new JTextArea(TEXTAREA_HEIGHT,TEXTAREA_WIDTH); 
 		// Will display the updated data when the user makes changes throughout: 
 		textArea2.setText("updated data could go here");
+		// Scroll Pane added to enable the user to scroll to view all the information: 
 		scrollPane2 = new JScrollPane(textArea2); 
 		panelFive.add(scrollPane2); 
+		// Add to the left-hand side of the page: 
 		panelTwo.add(panelFive, BorderLayout.EAST);
 		
-		// SOUTH BorderLayout 
+		
+		// SOUTH BorderLayout (Bottom of the GUI): 
 		panelSeven = new JPanel(); 
 		panelSeven.setLayout(new BorderLayout());
 		panelTwo.add(panelSeven, BorderLayout.SOUTH); 
-		// Save Button 
+		// Save Button - when clicked, saves to file and closes: 
 		button2 = new JButton("Save to File and Close");
+		// button2Listener implements the action required: 
 		button2.addActionListener(new button2Listener());
+		// added to the bottom, right-hand side of the page: 
+		// (under where the updated data is displayed): 
 		panelSeven.add(button2, BorderLayout.EAST);
 
+		
+		
+		
 		////////////////////////////////
-		// CENTER BorderLayout 
+		// CENTER BorderLayout - Center of the GUI 
 		////////////////////////////////
 		panelEight = new JPanel(); 
-		panelEight.setLayout(new GridLayout(0, 3));
+		// Two rows and three columns:
+		panelEight.setLayout(new GridLayout(GRID_LAYOUT_ROWS, CENTER_GRID_LAYOUT_COLS));
+		// Place this JPanel in the center of the GUI: 
 		panelTwo.add(panelEight, BorderLayout.CENTER);
 
 		
+		
+		
 		/////////////////////////////////
-		// Top Row
+		// Top Row of Center Area 
 		/////////////////////////////////
-		// Enter Teacher - .userEnters()
+		// Where the user can enter a skill they are searching for, 
+		// and the GUI will display the teachers with and without this skill: 
 		panelUserEnters = new JPanel(); 
-		panelUserEnters.setLayout(new GridLayout(0, 1));
+		panelUserEnters.setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
 		userEntersLabel = new JLabel("<html>Please enter the <b>skill</b><br> you are searching for,<br> followed by enter:</html>");
-		userEntersTraining = new JTextField();
-		userEntersTraining.addActionListener(new userEntersTrainingListener());
-		// Add event handling to clear the text when clicked
+		// Where the user enters the skill they are searching for: 
+		userEntersSkill = new JTextField();
+		// ActionListener that enables the output to be displayed: 
+		userEntersSkill.addActionListener(new userEntersSkillListener());
 		panelUserEnters.add(userEntersLabel);
-		panelUserEnters.add(userEntersTraining);
+		panelUserEnters.add(userEntersSkill);
+		// Add this panel to the overall center JPanel: 
 		panelEight.add(panelUserEnters);
 
 		
-		// Result Panel: teachers with these skills 
+		// JPanel that displays the teachers WITH the skill 
+		// the user searched for: 
 		panelTeachersWithTheseSkills = new JPanel(); 
-		panelTeachersWithTheseSkills.setLayout(new GridLayout(0,1));
+		panelTeachersWithTheseSkills.setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
 		teachersWithTheseSkillsLabel = new JLabel("<html> Teachers <b>with</b> these skills: <html>");
 		teachersWithTheseSkillsResult = new JTextArea(); 
+		// JScrollPane added to enable the user to read all the information if it is too long
+		// to fit in the JTextArea: 
 		teachersWithTheseSkillsScrollPanel = new JScrollPane(teachersWithTheseSkillsResult); 
 		panelTeachersWithTheseSkills.add(teachersWithTheseSkillsLabel);
 		panelTeachersWithTheseSkills.add(teachersWithTheseSkillsScrollPanel);
+		// Add this panel to the overall center JPanel:
 		panelEight.add(panelTeachersWithTheseSkills);
 		
 		
-		// Result Panel: teachers without these skills 
+		// JPanel that displays the teachers WITHOUT the skill
+		// the user searched for: 
 		panelTeachersWithoutTheseSkills = new JPanel(); 
-		panelTeachersWithoutTheseSkills.setLayout(new GridLayout(0,1));
+		panelTeachersWithoutTheseSkills.setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
 		teachersWithoutTheseSkillsLabel = new JLabel("<html> Teachers <b>without</b> these skills: <html>");
 		teachersWithoutTheseSkillsResult = new JTextArea(); 
+		// JScrollPane added to enable the user to read all the information if it is too long
+		// to fit in the JTextArea: 
 		teachersWithoutTheseSkillsScrollPanel = new JScrollPane(teachersWithoutTheseSkillsResult);
 		panelTeachersWithoutTheseSkills.add(teachersWithoutTheseSkillsLabel);
 		panelTeachersWithoutTheseSkills.add(teachersWithoutTheseSkillsScrollPanel);
+		// Add this panel to the overall center JPanel:
 		panelEight.add(panelTeachersWithoutTheseSkills);
 		
 
 		/////////////////////////////////
-		// Bottom Row
+		// Bottom Row of the Center area of the Border Layout: 
 		/////////////////////////////////
-		// Add Skill to Teacher Panel
+		// Add Skill to Teacher Panel - user enters (in order) - the teacher name, 
+		// and the skill to add to them, seperated by a space and followed by enter: 
 		panelAddSkillToTeacher = new JPanel(); 
-		panelAddSkillToTeacher.setLayout(new GridLayout(0,1)); 
+		panelAddSkillToTeacher.setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS)); 
 		addSkillToTeacherLabel = new JLabel("<html>Please enter the <b>teacher</b>,<br> and the <b>skill</b> to add to them,<br> seperated by a <b>space</b>,<br> and followed by <b>enter</b>:</html>");
 		addSkillToTeacherField = new JTextField(); 
+		// addSkillToTeacherFieldListener completes the necessary action to complete this 
+		// request: 
 		addSkillToTeacherField.addActionListener(new addSkillToTeacherFieldListener());
 		panelAddSkillToTeacher.add(addSkillToTeacherLabel);
 		panelAddSkillToTeacher.add(addSkillToTeacherField);
+		// Add this panel to the overall center JPanel:		
 		panelEight.add(panelAddSkillToTeacher);
 
 		
-		// Add Teacher to Lab panel 
+		// Add Teacher to Lab panel - user enters (in order) - the course, the lab name, 
+		// and the teacher to add to this lab, seperated by spaces and followed by enter: 
 		panelAddTeacherToLab = new JPanel(); 
-		panelAddTeacherToLab.setLayout(new GridLayout(0,1));
+		panelAddTeacherToLab.setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
 		addTeacherToLabLabel = new JLabel("<html>Please enter the <b>Course</b>,<br> and the <b>Lab</b>,<br> and the <b>Teacher</b> to add, seperated by a <b>space</b>,<br> and followed by <b>enter</b>:</html>");
 		addTeacherToLabEntry = new JTextField(); 
+		// addTeacherToLabEntryListener completes the necessary action to complete this request: 
 		addTeacherToLabEntry.addActionListener(new addTeacherToLabEntryListener());
 		panelAddTeacherToLab.add(addTeacherToLabLabel);
 		panelAddTeacherToLab.add(addTeacherToLabEntry);
+		// Add this panel to the overall center JPanel:
 		panelEight.add(panelAddTeacherToLab);
 		
 		
-		// Panel to check what requirements are still needed:
+		// panelCheckLabRequirements - user enters (in order) the course, and the lab name, 
+		// and the output will produce the number of teachers still needed for this lab. 
+		// This will change throughout the program - if the user has already added a teacher
+		// to a lab, the number required will decrease by 1, until it reaches zero - where 
+		// it will output that zero teachers are still needed for this lab:
 		panelCheckLabRequirements = new JPanel(); 
-		panelCheckLabRequirements.setLayout(new GridLayout(0,1));
+		panelCheckLabRequirements.setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
 		checkRequirementsLabel = new JLabel("<html>Please enter the <b>Course</b>,<br> and the <b>Lab</b>,<br> seperated by a <b>space</b>,<br>to see how many teachers are needed: </html>");
 		checkLabRequirementsEntry = new JTextField(); 
+		// checkLabRequirementsEntryListener completes the necessary action to complete this request: 
 		checkLabRequirementsEntry.addActionListener(new checkLabRequirementsEntryListener());
 		panelCheckLabRequirements.add(checkRequirementsLabel); 
 		panelCheckLabRequirements.add(checkLabRequirementsEntry);
+		// Add this panel to the overall center JPanel:
 		panelEight.add(panelCheckLabRequirements);
+		
+		// end of JPanels / end of display 
 	}
 	
 	
+	// set the SearchEngine object used within the GUI, in order 
+	// for the user to be able to search the file they input via the GUI: 
 	public void setSearchEngine(SearchEngine searchEngine) {
 		this.searchEngine = searchEngine; 
 	}
 	
+	// return 'courseInfo' (courseInfo is set by the .txt file the user inputs): 
 	public ArrayList<String> getCourseInfo(){
 	return this.courseInfo;
 	}
 
+	// return 'teachers' (teachers is set by the .txt file the user inputs): 
 	public ArrayList<Teacher> getTeacherList(){
 		return this.teachers;
 	}
 	
+	// return 'courses' ('courses' is set by the .txt file the user inputs): 
 	public ArrayList<Course> getCourseList(){
 		return this.courses;
 	}
 	
-	private static String teacherArrayListToString(ArrayList<Teacher> teacherList) {
-		StringBuffer sb = new StringBuffer(); 
-		for(Teacher s : teacherList) {
-			sb.append(s); 
-			sb.append(" "); 
-			sb.append("\n");
-		}
-		String str = sb.toString(); 
-		return str; 
+
+	// method to convert an ArrayList<> to String
+	// This was required in order to display the data on the GUI - 
+	// the JTextArea could not take an ArrayList as input, only a String:
+	// Thus ArrayLists had to be converted to String so that they could be displayed 
+	// to the user. 
+	// This method uses generics to take any type (and thus can be used with Teacher, Course): 
+	private static <T> String iterableToString(Iterable<T> iterable) {
+	    StringJoiner sj = new StringJoiner("\n");
+	    iterable.forEach(t -> sj.add(t.toString()));
+	    return sj.toString();
 	}
 
 
@@ -263,20 +368,23 @@ public class View {
 	// buttonOne's actionListener: 
 	public class button1Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			// set courseInfo to be populated by the data from the .txt file: 
 			courseInfo = fileHandler.uploadFile();
 			// Creates DataHandling object so data from file can be read: 
 			DataHandling dh = new DataHandling(courses, teachers, courseInfo); 
+			// the DataHandling object will populate the empty lists ('courses' and 'teachers')
+			// with the data input by the user, as requested by the AE2: 
 			dh.dataHandler();
 			String listString = courseInfo.stream().map(Object::toString)
                     .collect(Collectors.joining("," + "\n"));
-			// textArea1 should ONLY be set at the start of the program
-			// At no other point does it change 
+			// textArea1 is set to be the data input by the user from the .txt file: 
 			textArea1.setText(listString);
 			textArea2.setText("");
+			// After the Class Director has input their file, switch to the Administrator view: 
 			cardLayout.show(frame.getContentPane(),"two");
 		}
-
 	}
+	
 
 	// ActionListener for 'addSkillToTeacherField' 
 	private class addSkillToTeacherFieldListener implements ActionListener {
@@ -284,68 +392,78 @@ public class View {
 			String data = addSkillToTeacherField.getText();
 			// Pass to Search Engine's method to add a particular skill to a Teacher: 
 			searchEngine.addSkillToTeacher(data); 
+			// Update the JTextArea so that the user knows their request was processed: 
 			addSkillToTeacherField.setText("Processed");
-			// Array to String, so it can be printed in the JTextField 
-			StringBuffer sb = new StringBuffer();
-		      for (Teacher s : searchEngine.getTeacherList()) {
-		         sb.append(s);
-		         sb.append("\n");
-		         
-		      }
-		      String str = sb.toString();
-		      textArea2.setText(str);
+			// ArrayList to String, so it can be printed in the JTextField (as a JTextField
+			// requires a String as a parameter): 
+			String str = iterableToString(searchEngine.getTeacherList());
+		     // set textArea2 with the updated data: 
+		     textArea2.setText(str);
 		}
 	}
 	
+	// Used when the user aims to add a Teacher to a Lab: 
 	private class addTeacherToLabEntryListener implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
+		// fetch the data input by the user: 
 		String data = addTeacherToLabEntry.getText();
+		// pass it to the search engine so that that particular teacher can 
+		// be added to the lab: 
 		searchEngine.addTeacherToLab(data);
+		// update the output so the user knows their request was processed: 
 		addTeacherToLabEntry.setText("Processed");
-		StringBuffer sb = new StringBuffer();
-	      for (Course s : searchEngine.getCourseList()) {
-	         sb.append(s);
-	         sb.append(" ");
-	      }
-	      String str = sb.toString();
-	      textArea2.setText(str);
+		String str = iterableToString(searchEngine.getCourseList());
+	    // display the updated data: 
+	    textArea2.setText(str);
 		}
 	}
 	
+	// Used when the user checks how many teachers are still required per lab: 
 	private class checkLabRequirementsEntryListener implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
+			// fetch the data input by the user: 
 			String data = checkLabRequirementsEntry.getText(); 
+			// call .findTeachersNeededPerLab() to extract the number of teachers still required: 
 			int temp = searchEngine.findTeachersNeededPerLab(data);
 			String str = "This lab currently needs " + temp + " teachers.";
+			// update the output for the user: 
 			checkLabRequirementsEntry.setText(str);
 			
 		}
 	}
 
-	
-	private class userEntersTrainingListener implements ActionListener {
+	// called when the user wants to search what teachers have a particular skill: 
+	private class userEntersSkillListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String data = userEntersTraining.getText();
+			// fetch the data the user input: 
+			String data = userEntersSkill.getText();
+			// use .findTeacher() from the SearchEngine class to find the result: 
 			ArrayList<Teacher> teachersWithSkill = searchEngine.findTeacher(data); 
+			// The number of teachers with this skill: 
 			int counter1 = teachersWithSkill.size(); 
-		      // Teachers WITH this skill displayed in the output: 
-			teachersWithTheseSkillsResult.setText("There are " + counter1 + " teacher(s) with this skill: \n\n" + teacherArrayListToString(teachersWithSkill));
+		     // Teachers WITH this skill displayed in the output: 
+			teachersWithTheseSkillsResult.setText("There are " + counter1 + " teacher(s) with this skill: \n\n" + iterableToString(teachersWithSkill));
 			// Clear the search box so another search can occur: 
-			userEntersTraining.setText("");
+			userEntersSkill.setText("");
 			// Teachers without this skill: 
 			ArrayList<Teacher> teachersWithoutSkill = searchEngine.findTeachersToTrain(data);
+			// The number of teachers without this skill: 
 			int counter2 = teachersWithoutSkill.size();
-				// Teachers WITHOUT this skill displayed in the output: 
-				teachersWithoutTheseSkillsResult.setText("There are " + counter2 + " teacher(s) without this skill: \n\n" + teacherArrayListToString(teachersWithoutSkill));
+			// Teachers WITHOUT this skill displayed in the output: 
+			teachersWithoutTheseSkillsResult.setText("There are " + counter2 + " teacher(s) without this skill: \n\n" + iterableToString(teachersWithoutSkill));
 			}			
 		}
 	
+	
+	// Called when the user presses the button to "save to file and close" (button2)
 	private class button2Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			searchEngine.getCourseList(); 
+			// Save to file with the data (which is updated throughout the program): 
 			FileIO.saveFile(searchEngine.getCourseList(), searchEngine.getTeacherList());
+			// Close the program using System.exit(0): 
+			// (Constant for 0 used to meet good design requirements): 
 			System.exit(CLOSE_PROGRAM);		
 			}
 	}
 }
-
