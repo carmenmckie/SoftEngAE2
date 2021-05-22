@@ -10,28 +10,22 @@ public class Teacher {
 	public Teacher(String teacherName, ArrayList<String> teacherSkills) {
 		this.teacherName = teacherName;
 		this.teacherSkills = teacherSkills;
-//		this.teacherTraining = teacherTraining;
 	}
+	
 	public Teacher() {
 		this.teacherName = "";
 		this.teacherSkills = new ArrayList<String>();
-	}
-
-        return contents;
 	}
 	
 	public void setSkill(String skill) {
 		this.teacherSkills.add(skill);
 	}
 	
-	
-	//setting and getting
-
+	//setting and getting:
 	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
 	}
 	
-
 	public String printSkills() {
 		String s = "";
 		for(String i: teacherSkills) {
@@ -40,6 +34,13 @@ public class Teacher {
 		return s;
 	}
 	
+	public ArrayList<String> getTeacherSkills() {
+		return teacherSkills;
+	}
+
+	public String getTeacherName() {
+		return this.teacherName; 
+	}
 	
 	//toString
 	public String toString() {
@@ -47,37 +48,5 @@ public class Teacher {
 	}
 	
 	
-	public ArrayList<String> getTeacherSkills() {
-		return teacherSkills;
-	}
-
-	
-	
-	///Added in Tuesday 18.05.2021
-	public String getTeacherName() {
-		return this.teacherName; 
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//Main method
-//	public static void main(String[] args) {
-	
-	//Read the data to arrylist
-	//because our group has not determined the data format, this is a simple way of writing
-//	Scanner s = new Scanner(new File("filepath"));
-//	ArrayList<String> list = new ArrayList<String>();
-//	while (s.hasNext()){
-//	    list.add(s.next());
-//	}
-//	s.close();
-//	}
 
 }
