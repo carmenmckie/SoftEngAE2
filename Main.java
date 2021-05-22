@@ -7,13 +7,12 @@ public class Main {
 				View GUI = new View(model); 
 				// Access the singleton searchEngine: 
 				SearchEngine searchEngine = SearchEngine.getSearchEngine(); 
-				// searchEngine is then populated with the data that the user 
-				// input via the JFileChooser:
-				model.setSearchEngine(searchEngine);
-				model.getSearchEngine().setAll(model.getTeacherList(), model.getCourseList());
-				// The GUI's searchEngine instance variable is then set to be 
+				// The Model object's searchEngine instance variable is then set to be 
 				// this searchEngine, in order for the user to search the data
 				// they input into the program by interacting with the GUI: 
 				model.setSearchEngine(searchEngine);
+				// searchEngine is then populated with the data that the user 
+				// input via the JFileChooser:
+				model.getSearchEngine().setAll(model.getTeacherList(), model.getCourseList());
 			}
 	}
