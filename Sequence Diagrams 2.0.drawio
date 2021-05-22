@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-22T16:53:34.532Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15" etag="gO3e2ZtN_Cawf2Zq-w-O" version="14.7.0" type="github" pages="11">
+<mxfile host="app.diagrams.net" modified="2021-05-22T16:55:09.708Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15" etag="0_pRBErNfeGl1hanTl1R" version="14.7.0" type="github" pages="12">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="A1">
     <mxGraphModel dx="2112" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -941,7 +941,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="om_zSJqiwvuPd-b_7Vcq" name="B1 MVC">
+  <diagram id="om_zSJqiwvuPd-b_7Vcq" name="B1, B2 MVC">
     <mxGraphModel dx="1109" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="nkSfgoSuit1Ir-Zu2J7h-0" />
@@ -1033,12 +1033,38 @@
         <mxCell id="_Nq831isPchQCGtSq0cF-47" value="Notify user&lt;br&gt;of suitable&amp;nbsp;&lt;br&gt;staff by updating&lt;br&gt;GUI" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="nkSfgoSuit1Ir-Zu2J7h-1">
           <mxGeometry x="160" y="390" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="5pQ_kgXCnc5Gd82ijzvP-0" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="nkSfgoSuit1Ir-Zu2J7h-1">
+        <mxCell id="namejpQsc8UrSj30dqwT-2" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="nkSfgoSuit1Ir-Zu2J7h-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="576.65" y="466.77" as="sourcePoint" />
-            <mxPoint x="160" y="470" as="targetPoint" />
+            <mxPoint x="257" y="470" as="sourcePoint" />
+            <mxPoint x="149.99999999999977" y="470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="namejpQsc8UrSj30dqwT-3" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="nkSfgoSuit1Ir-Zu2J7h-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="358.5" y="470" as="sourcePoint" />
+            <mxPoint x="251.49999999999977" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="namejpQsc8UrSj30dqwT-4" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="nkSfgoSuit1Ir-Zu2J7h-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="470" as="sourcePoint" />
+            <mxPoint x="362.9999999999998" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="namejpQsc8UrSj30dqwT-5" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="nkSfgoSuit1Ir-Zu2J7h-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="580" y="470" as="sourcePoint" />
+            <mxPoint x="472.9999999999998" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="uEgsrFa9h4R8T78n6HK2" name="B2 MVC">
+    <mxGraphModel dx="943" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="bEhE1iOQ5A-hRAbtIP9O-0" />
+        <mxCell id="bEhE1iOQ5A-hRAbtIP9O-1" parent="bEhE1iOQ5A-hRAbtIP9O-0" />
       </root>
     </mxGraphModel>
   </diagram>
