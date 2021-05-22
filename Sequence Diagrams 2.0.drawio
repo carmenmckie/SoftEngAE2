@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-22T17:04:11.848Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15" etag="9tYKkAMT9_JtI0iylFyt" version="14.7.0" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2021-05-22T17:51:39.979Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15" etag="5owrXCJgAdPoYj89YdYi" version="14.7.0" type="github" pages="12">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="A1">
     <mxGraphModel dx="2112" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -716,7 +716,7 @@
         <mxCell id="DfmPbPp52cDktXiG-qpe-7" value="&lt;span style=&quot;color: rgb(23, 43, 77); font-size: 14px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(244, 245, 247); display: inline; float: none;&quot;&gt;Class Director&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="KrGE8ehnG4ziwq_qoSwl-1">
           <mxGeometry x="-740" y="130" width="115" height="45" as="geometry" />
         </mxCell>
-        <mxCell id="DfmPbPp52cDktXiG-qpe-8" value="A1: Load Data from File" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="KrGE8ehnG4ziwq_qoSwl-1">
+        <mxCell id="DfmPbPp52cDktXiG-qpe-8" value="A1, A2, A4" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="KrGE8ehnG4ziwq_qoSwl-1">
           <mxGeometry x="-827" y="50" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell id="DfmPbPp52cDktXiG-qpe-9" value=":View" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="KrGE8ehnG4ziwq_qoSwl-1">
@@ -1061,7 +1061,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="uEgsrFa9h4R8T78n6HK2" name="B3 MVC">
-    <mxGraphModel dx="1109" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="943" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="bEhE1iOQ5A-hRAbtIP9O-0" />
         <mxCell id="bEhE1iOQ5A-hRAbtIP9O-1" parent="bEhE1iOQ5A-hRAbtIP9O-0" />
